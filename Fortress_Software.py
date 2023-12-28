@@ -1,38 +1,35 @@
 import cv2
 import torch
-from torchvision import transforms
+import numpy as np
 
-# yolo5s 预训练模型
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
-model.eval()
+class Yolo_Bracket:
+    def __init__(self) -> None:
+        pass
+    def Load_Model():
+        model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
+        return model
 
-# 定义视频源，0 通常是电脑的内置摄像头
-cap = cv2.VideoCapture(0)
-
-while cap.isOpened():
-    ret, frame = cap.read()
-    if not ret:
-        break
-
-    # 将图像转换为模型的输入格式
-    img = transforms.ToTensor()(frame)
-    img = torch.unsqueeze(img, 0)
-
-    # 使用模型进行预测
-    with torch.no_grad():
-        predictions = model(img)
-
-    # 绘制边框和标签
-    for prediction in predictions[0]:
-        if prediction[5] == 0 and prediction[4] >= 0.5:  # 类别 0 通常为人类
-            x1, y1, x2, y2 = map(int, prediction[:4])
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-
-    cv2.imshow('Real-time Object Detection', frame)
-
-    # 按 'q' 退出
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
+    def Capture_Video(model):
+        cap = cv2.VideoCapture(0)
+        while True:
+            # 读取摄像头的一帧
+            ret, frame = cap.read()
+            if not ret:
+                break
+            # 将图像转换为YOLO模型需要的格式
+            results = model(frame)
+            # 解析模型返回的结果
+            for i in range(len(results.pred[0])):
+                if results.names[int(results.pred[0][i][5])] == 'person':
+                    xmin, ymin, xmax, ymax = results.pred[0][i][:4].int()
+                    cv2.rectangle(frame, (int(xmin), int(ymin)), (int(xmax), int(ymax)), (255, 0, 0), 2)
+            # 显示处理后的图像
+            cv2.imshow('frame', frame)
+            # 如果按下'q'键，退出循环
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+        cap.release()
+        cv2.destroyAllWindows()
+        
+if __name__ == "__main__":
+    Yolo_Bracket.Capture_Video(Yolo_Bracket.Load_Model())
