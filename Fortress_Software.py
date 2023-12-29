@@ -2,6 +2,8 @@ import cv2
 import torch
 import numpy as np
 print(cv2.__version__)
+camera_index = 0  # 视频源索引号
+
 class Yolo_Bracket:
     def __init__(self) -> None:
         pass
@@ -10,7 +12,7 @@ class Yolo_Bracket:
         return model
 
     def Capture_Video(model):
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(camera_index)
         while True:
             # 读取摄像头的一帧
             ret, frame = cap.read()
@@ -25,7 +27,6 @@ class Yolo_Bracket:
                     cv2.rectangle(frame, (int(xmin), int(ymin)), (int(xmax), int(ymax)), (255, 0, 0), 2)
             # 显示处理后的图像
             cv2.imshow('Capture_Human', frame)
-            cv2.resizeWindow('Capture_Human', 1600, 900)
             # 如果按下'q'键，退出循环
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break

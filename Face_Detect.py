@@ -1,30 +1,38 @@
 import cv2
-import face_recognition
 
-# 打开摄像头
-video_capture = cv2.VideoCapture(0)
+# 初始化摄像头
+cap = cv2.VideoCapture(0)
+
+# 加载模型
+modelFile = "res10_300x300_ssd_iter_140000.caffemodel"
+configFile = "deploy.prototxt"
+net = cv2.dnn.readNetFromCaffe(configFile, modelFile)
 
 while True:
-    # 捕获一帧视频
-    ret, frame = video_capture.read()
+    ret, frame = cap.read()
+    if not ret:
+        break
 
-    # 将视频帧转换成RGB色彩（face_recognition使用RGB）
-    rgb_frame = frame[:, :, ::-1]
+    (h, w) = frame.shape[:2]
+    blob = cv2.dnn.blobFromImage(cv2.resize(frame, (300, 300)), 1.0, (300, 300), (104.0, 177.0, 123.0))
 
-    # 查找视频帧中所有面部的位置
-    face_locations = face_recognition.face_locations(rgb_frame)
+    net.setInput(blob)
+    detections = net.forward()
 
-    # 在每个面部周围绘制一个方框
-    for top, right, bottom, left in face_locations:
-        cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
+    # 循环检测
+    for i in range(0, detections.shape[2]):
+        confidence = detections[0, 0, i, 2]
 
-    # 显示结果图像
-    cv2.imshow('Video', frame)
+        if confidence > 0.5:
+            box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
+            (startX, startY, endX, endY) = box.astype("int")
 
-    # 按'q'退出循环
+            cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 0, 255), 2)
+
+    cv2.imshow("Frame", frame)
+
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# 释放摄像头并关闭窗口
-video_capture.release()
+cap.release()
 cv2.destroyAllWindows()
