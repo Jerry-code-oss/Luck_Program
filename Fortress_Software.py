@@ -1,7 +1,7 @@
 import cv2
 import torch
 import numpy as np
-
+print(cv2.__version__)
 class Yolo_Bracket:
     def __init__(self) -> None:
         pass
@@ -24,7 +24,8 @@ class Yolo_Bracket:
                     xmin, ymin, xmax, ymax = results.pred[0][i][:4].int()
                     cv2.rectangle(frame, (int(xmin), int(ymin)), (int(xmax), int(ymax)), (255, 0, 0), 2)
             # 显示处理后的图像
-            cv2.imshow('frame', frame)
+            cv2.imshow('Capture_Human', frame)
+            cv2.resizeWindow('Capture_Human', 1600, 900)
             # 如果按下'q'键，退出循环
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
