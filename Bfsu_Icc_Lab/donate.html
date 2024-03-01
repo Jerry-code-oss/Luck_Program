@@ -1,1 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>捐书</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
 
+        header, footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+    
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #donationForm {
+            max-width: 500px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #donationForm h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #donationForm label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        #donationForm input[type="text"],
+        #donationForm input[type="email"],
+        #donationForm input[type="date"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        #donationForm input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+            display: block;
+        }
+
+        #donationForm input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        @media (max-width: 768px) {
+            nav a {
+                flex: 0 1 calc(33.33% - 10px);
+                display: block;
+                margin: 5px 0;
+            }
+            .book {
+                width: 96%;
+                margin: 2%;
+            }
+        }
+        @media (max-width: 480px) {
+            nav a {
+                flex: 0 1 calc(50% - 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>北京外国语大学国际课程中心图书室</h1> 
+    </header>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="donate.html" style="text-decoration: underline;">捐书</a>
+        <a href="borrow.html">借书</a>
+        <a href="return.html">还书</a>
+        <a href="about.html">关于</a>
+        <a href="support.html">支持</a>
+        <a href="report.html">意见</a>
+    </nav>
+    <main>
+        <div id="donationForm">
+            <h2>捐书表格</h2>
+            <form action="/submit_donation" method="post" enctype="application/x-www-form-urlencoded">
+                <label for="donorName">捐书者姓名:</label><br>
+                <input type="text" id="donorName" name="donorName" required><br>
+                <label for="bookName">书名:</label><br>
+                <input type="text" id="bookName" name="bookName" required><br>
+                <label for="studentId">学号 (四位数字):</label><br>
+                <input type="text" id="studentId" name="studentId" pattern="^[0-9]{4}$" title="请输入四位数字的学号" required><br>
+                <label for="email">邮箱:</label><br>
+                <input type="email" id="email" name="email" required><br>
+                <label for="phoneNumber">手机号 (11位数字):</label><br>
+                <input type="text" id="phoneNumber" name="phoneNumber" pattern="^[0-9]{11}$" title="请输入11位数字的手机号" required><br>
+                <label for="donationDate">捐书日期:</label><br>
+                <input type="date" id="donationDate" name="donationDate" required readonly><br>
+                <input type="submit" value="提交">
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>版权所有 &copy; 2023 北京外国语大学国际课程中心图书室</p>
+    	<p class="icp"><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="icp-link">京ICP备2023029032号-1</a></p>
+
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementById('donationDate').value = today;
+        });
+    </script>
+
+</body>
+</html>
