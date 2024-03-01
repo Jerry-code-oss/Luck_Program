@@ -1,1 +1,271 @@
 
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京外国语大学国际课程中心图书室</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .icp-link {
+            font-size: 0.7em;
+            color: white;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header, footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            /*justify-content: center;*/
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .carousel-container {
+            position: relative;
+            width: 80%;
+            max-height: 500px;
+            overflow: hidden;
+            display: grid; /* Change display to grid */
+            margin-bottom: 20px;
+        }
+        
+        .carousel-slide {
+    	    grid-area: 1 / 1;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+            height: 500px;
+            display: flex;
+            align-items: center; /* Vertically center the image */
+            justify-content: center; /* Horizontally center the image */
+        }
+
+        .carousel-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            transform: translateY(-50%);
+        }
+        
+        .prev, .next {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.4s ease;
+            pointer-events: all;
+        }
+        
+        .prev:hover, .next:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .recommended-books {
+            padding: 20px 10%;
+            text-align: center;
+            width: 100%;
+        }
+
+        .book {
+            display: inline-block;
+            width: 23%;
+            margin: 1%;
+            background-color: #fff;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .book:hover {
+            transform: translateY(-10px);
+        }
+
+        .book img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .book h3 {
+            margin: 10px 0;
+        }
+
+        .recommendation {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        @media (max-width: 768px) {
+        nav a {
+            flex: 0 1 calc(33.33% - 10px);
+            display: block;
+            margin: 5px 0;
+        }
+         .book {
+            width: 96%;
+            margin: 2%;
+        }
+        @media (max-width: 480px) {
+        nav a {
+            flex: 0 1 calc(50% - 10px);
+        }
+}
+}
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>北京外国语大学国际课程中心图书室</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="donate.html">捐书</a>
+        <a href="borrow.html">借书</a>
+        <a href="return.html">还书</a>
+        <a href="about.html">关于</a>
+        <a href="support.html">支持</a>
+        <a href="report.html">意见</a>
+    </nav>
+
+    <main>
+        <div class="carousel-container" id="carouselContainer">
+            <div class="carousel-slide"><img src="image1.jpg" alt="图片1"></div>
+            <div class="carousel-slide"><img src="image2.jpg" alt="图片2"></div>
+            <div class="carousel-slide"><img src="image3.jpg" alt="图片3"></div>
+            <div class="carousel-slide"><img src="image4.jpg" alt="图片4"></div>
+            <div class="carousel-slide"><img src="image5.jpg" alt="图片5"></div>
+            <div class="carousel-slide"><img src="image6.jpg" alt="图片6"></div>
+            <div class="carousel-slide"><img src="image7.jpg" alt="图片7"></div>
+            <div class="carousel-slide"><img src="image8.jpg" alt="图片8"></div>
+            <div class="carousel-slide"><img src="image9.jpg" alt="图片9"></div>
+            <div class="carousel-slide"><img src="image10.jpg" alt="图片10"></div>
+            <div class="carousel-slide"><img src="image11.jpg" alt="图片11"></div>
+            <div class="carousel-slide"><img src="image12.jpg" alt="图片12"></div>
+        </div>
+        <div class="controls">
+            <button class="prev" id="prevBtn">&#10094;</button>
+            <button class="next" id="nextBtn">&#10095;</button>
+        </div>
+        <div class="recommended-books">
+            <h2>本月推荐书目</h2>
+            <div class="book" id="book1">
+                <img src="book1.jpg" alt="LEAN IN">
+                <h3>LEAN IN</h3>
+                <p>《LEAN IN》由Facebook首席运营官Sheryl Sandberg撰写，探讨了在职业上所面临的挑战。该书提醒我们应该勇敢地迈向前台，追求自己的梦想。</p>
+                <p class="recommendation">推荐理由: 探索如何更好地在职场中展翅飞翔。</p>
+            </div>
+            <div class="book" id="book2">
+                <img src="book2.jpg" alt="HOLES">
+                <h3>HOLES</h3>
+                <p>《HOLES》是一部关于友情、冒险和魔法的故事，讲述了一个被错误定罪的少年如何寻找真相。</p>
+                <p class="recommendation">推荐理由: 生动的情节与深入人心的角色。</p>
+            </div>
+            <div class="book" id="book4">
+                <img src="book3.jpg" alt="龙族3">
+                <h3>龙族3</h3>
+                <p>《龙族3》继续了龙族的故事线，展现了一个宏大的世界观和错综复杂的人物关系。</p>
+                <p class="recommendation">推荐理由: 为读者带来深入骨髓的冒险体验。</p>
+            </div>
+            <div class="book" id="book3">
+                <img src="book4.jpg" alt="解读柏拉图">
+                <h3>解读柏拉图</h3>
+                <p>《解读柏拉图》深入探讨了古希腊哲学家柏拉图的哲学思想，为我们打开了一个理性探求真理的大门。</p>
+                <p class="recommendation">推荐理由: 深度探索古典哲学的魅力与智慧。</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 北京外国语大学国际课程中心图书室</p>
+        <p class="icp"><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="icp-link">京ICP备2023029032号-1</a></p>
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+        const slideInterval = 3000;
+
+        slides[currentIndex].style.opacity = "1";  // Show the first slide
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            goToNextSlide();
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            goToPrevSlide();
+        });
+
+        function goToNextSlide() {
+            slides[currentIndex].style.opacity = "0";  // Hide the current slide
+            currentIndex++;
+            if (currentIndex == totalSlides) {
+                currentIndex = 0;
+            }
+            slides[currentIndex].style.opacity = "1";  // Show the next slide
+        }
+
+        function goToPrevSlide() {
+            slides[currentIndex].style.opacity = "0";  // Hide the current slide
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = totalSlides - 1;
+            }
+            slides[currentIndex].style.opacity = "1";  // Show the previous slide
+        }
+
+        setInterval(goToNextSlide, slideInterval); 
+
+    </script>
+
+</body>
+
+</html>
