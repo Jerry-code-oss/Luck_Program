@@ -109,20 +109,6 @@ print("\nSample lines from file:")
 printLines(datafile)
 
 
-
-#todo 以上完成了抽取对话input 和 target   \t分割
-############################################
-############################################
-############################################
-############################################
-
-
-
-
-
-
-
-
 # 默认词向量
 PAD_token = 0  # Used for padding short sentences
 SOS_token = 1  # Start-of-sentence token
@@ -238,19 +224,6 @@ for pair in pairs[:10]:
 
 
 
-
-
-
-
-
-#todo 以上把句子进行了过滤 加入到 Voc词典中了
-############################################
-############################################
-############################################
-############################################
-
-
-
 MIN_COUNT = 3    # 修剪的最小字数阈值
 
 def trimRareWords(voc, pairs, MIN_COUNT):
@@ -284,20 +257,6 @@ def trimRareWords(voc, pairs, MIN_COUNT):
 
 # 修剪voc和对
 pairs = trimRareWords(voc, pairs, MIN_COUNT)   #todo 句子对儿！
-
-
-
-#todo 以上得到所有清洗后的数据 得到了 pair对儿 是句子对儿，
-#todo 其实Voc词典是用来过滤pair对中出现了低频词的情况
-############################################
-############################################
-############################################
-############################################
-
-
-
-
-
 
 def indexesFromSentence(voc, sentence):
     return [voc.word2index[word] for word in sentence.split(' ')] + [EOS_token]  # todo word 转成 index 加一个结束标志
@@ -361,18 +320,6 @@ print("lengths:", lengths)
 print("target_variable:", target_variable)
 print("mask:", mask)
 print("max_target_len:", max_target_len)
-
-
-
-
-
-#todo 以上数据准备好了
-#todo 以下开始搭模型
-############################################
-############################################
-############################################
-############################################
-
 
 
 class EncoderRNN(nn.Module):
@@ -497,9 +444,6 @@ class LuongAttnDecoderRNN(nn.Module):
         output = F.softmax(output, dim=1)   # [256，9088]
         # 返回输出和在最终隐藏状态
         return output, hidden
-
-
-
 
 
 def maskNLLLoss(inp, target, mask):
