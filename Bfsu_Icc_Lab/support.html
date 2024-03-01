@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支持我们 - 北京外国语大学国际课程中心图书室</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
 
+        header, footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav {
+            background-color: #444;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .support-content {
+            max-width: 600px;
+        }
+
+        .qr-codes {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .qr-codes img {
+            width: 150px;
+            height: auto;
+        }
+
+        .acknowledgment-section {
+            margin-top: 20px;
+        }
+
+        .acknowledgment-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease-out;
+            text-align: left;
+        }
+
+        .toggle-button {
+            background-color: black; /* Black */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .toggle-button:hover {
+            background-color: white; 
+            color: black; 
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>北京外国语大学国际课程中心图书室</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="donate.html">捐书</a>
+        <a href="borrow.html">借书</a>
+        <a href="return.html">还书</a>
+        <a href="about.html">关于</a>
+        <a href="support.html" style="text-decoration: underline;">支持</a>
+        <a href="report.html">意见</a>
+    </nav>
+
+    <main>
+        <div class="support-content">
+            <h2>支持我们</h2>
+            <p>您的支持是我们不断前进的动力。只需简单的打赏，就能让您的名字出现在网站制作名单上，同时能为我们的图书馆和正在进行的项目提供巨大的帮助。<br>谢谢您的慷慨支持！</p>
+            <h3>打赏作者，支持我们</h3>
+            <div class="qr-codes">
+                <div>
+                    <p>微信</p>
+                    <img src="support_wechat.png" alt="微信支付二维码">
+                </div>
+                <div>
+                    <p>支付宝</p>
+                    <img src="support_alipay.jpg" alt="支付宝支付二维码">
+                </div>
+            </div>
+            <div class="acknowledgment-section">
+                <button class="toggle-button" onclick="toggleAcknowledgmentList()">展开鸣谢名单</button>
+                <div class="acknowledgment-list" id="acknowledgmentList">
+                    <h3>鸣谢名单:</h3>
+                    <p>付明宇</p>
+                    <p>袁帅</p>
+                    <p>何晶</p>
+                    <p>付建立</p>
+                    <p>徐艳红</p>
+                    <p>江京榕</p>
+                    <p>曹瀚元</p>
+                    <p>付俊</p>
+                    <p>膏药稳重</p>
+		    <p>打赏以加入名单</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 北京外国语大学国际课程中心图书室</p>
+        <p class="icp"><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="icp-link">京ICP备2023029032号-1</a></p>
+
+    </footer>
+
+    <script>
+        function toggleAcknowledgmentList() {
+            var list = document.getElementById("acknowledgmentList");
+            var button = document.querySelector(".toggle-button");
+            if (list.style.maxHeight){
+                list.style.maxHeight = null;
+                button.innerHTML = "展开鸣谢名单";
+            } else {
+                list.style.maxHeight = list.scrollHeight + "px";
+                button.innerHTML = "折叠鸣谢名单";
+            } 
+        }
+    </script>
+
+</body>
+
+</html>
