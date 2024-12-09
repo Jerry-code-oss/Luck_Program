@@ -15,6 +15,9 @@ A website project for beijing foreign study university international curriculum 
 More detail can access beiwaiicclib.site
 status: complete
 
+Neuron simulation
+Neuron simulater simulate how neural are growing inside human's brain. This project future's expectation is to help computer think like human and have intelligent base on simulation.
+
 Fortress:
 Fortress is a project that to have a combination with software and hardware, this project aimming to
 automaticaly control a toy gun to draw a bead on a person.
